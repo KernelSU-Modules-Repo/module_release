@@ -46,31 +46,43 @@ export const createReleaseWithAsset = async (
 
   console.log(`Creating release for tag: ${tag}`)
 
-  // Create release
+  // Step 1: Create release as draft first (for immutable release compatibility)
   const releaseResponse = await github.rest.repos.createRelease({
     owner,
     repo,
     tag_name: tag,
     name,
     body,
-    draft: false,
+    draft: true, // Create as draft first
     prerelease: config.input_prerelease,
     target_commitish: config.input_target_commitish,
     generate_release_notes: config.input_generate_release_notes,
     make_latest: config.input_make_latest
   })
 
-  const release = releaseResponse.data as Release
-  console.log(`Release created: ${release.html_url}`)
+  const draftRelease = releaseResponse.data as Release
+  console.log(`Draft release created: ${draftRelease.html_url}`)
 
-  // Upload asset immediately
+  // Step 2: Upload asset to draft release
   const assetResult = await upload(
     config,
     github,
-    release.upload_url,
+    draftRelease.upload_url,
     filePath,
     assetName
   )
+
+  // Step 3: Publish the release (set draft to false)
+  console.log('Publishing release...')
+  const publishResponse = await github.rest.repos.updateRelease({
+    owner,
+    repo,
+    release_id: draftRelease.id,
+    draft: false
+  })
+
+  const release = publishResponse.data as Release
+  console.log(`Release published: ${release.html_url}`)
 
   return { release, asset: assetResult }
 }
