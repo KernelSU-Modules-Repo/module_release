@@ -34,7 +34,7 @@ jobs:
           zip -r module.zip .
 
       - name: 创建 Release
-        uses: ylarod/module_release@v1
+        uses: KernelSU-Modules-Repo/module_release@v1
         with:
           file: module.zip
           token: ${{ secrets.GITHUB_TOKEN }}
