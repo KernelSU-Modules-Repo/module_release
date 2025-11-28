@@ -2,7 +2,8 @@
 
 [English](README.md) | 简体中文
 
-一个用于创建不可变 Release 的 GitHub Action，支持 Magisk/KernelSU 模块的 `module.prop` 验证。
+一个用于创建不可变 Release 的 GitHub Action，支持 Magisk/KernelSU 模块的
+`module.prop` 验证。
 
 ## 特性
 
@@ -42,25 +43,25 @@ jobs:
 
 ## 输入参数
 
-| 参数 | 描述 | 必填 | 默认值 |
-|------|------|------|--------|
-| `file` | 要上传的 zip 文件路径 | 是 | - |
-| `tag_name` | Release 的 Git 标签名 | 否 | `github.ref_name` |
-| `name` | Release 名称 | 否 | 标签名 |
-| `body` | Release 描述内容 | 否 | - |
-| `body_path` | 包含 Release 描述的文件路径 | 否 | - |
-| `prerelease` | 标记为预发布版本 | 否 | `false` |
-| `target_commitish` | 标签对应的 commitish 值 | 否 | - |
-| `token` | GitHub token | 否 | `github.token` |
-| `generate_release_notes` | 自动生成发布说明 | 否 | `false` |
-| `make_latest` | 标记为最新版本 (`true`/`false`/`legacy`) | 否 | - |
+| 参数                     | 描述                                     | 必填 | 默认值            |
+| ------------------------ | ---------------------------------------- | ---- | ----------------- |
+| `file`                   | 要上传的 zip 文件路径                    | 是   | -                 |
+| `tag_name`               | Release 的 Git 标签名                    | 否   | `github.ref_name` |
+| `name`                   | Release 名称                             | 否   | 标签名            |
+| `body`                   | Release 描述内容                         | 否   | -                 |
+| `body_path`              | 包含 Release 描述的文件路径              | 否   | -                 |
+| `prerelease`             | 标记为预发布版本                         | 否   | `false`           |
+| `target_commitish`       | 标签对应的 commitish 值                  | 否   | -                 |
+| `token`                  | GitHub token                             | 否   | `github.token`    |
+| `generate_release_notes` | 自动生成发布说明                         | 否   | `false`           |
+| `make_latest`            | 标记为最新版本 (`true`/`false`/`legacy`) | 否   | -                 |
 
 ## 输出参数
 
-| 输出 | 描述 |
-|------|------|
-| `url` | Release 页面 URL |
-| `id` | Release ID |
+| 输出         | 描述             |
+| ------------ | ---------------- |
+| `url`        | Release 页面 URL |
+| `id`         | Release ID       |
 | `upload_url` | Release 上传 URL |
 
 ## module.prop 要求
@@ -78,15 +79,15 @@ description=Module description
 
 ### 验证规则
 
-| 字段 | 要求 |
-|------|------|
-| `id` | 必须匹配 `^[a-zA-Z][a-zA-Z0-9._-]+$` 且等于仓库名称 |
-| `name` | 必填，任意单行字符串 |
-| `version` | 必填，任意单行字符串 |
-| `versionCode` | 必填，必须是整数 |
-| `author` | 必填，任意单行字符串 |
-| `description` | 必填，任意单行字符串 |
-| 换行符 | 必须使用 UNIX (LF)，不能是 Windows (CR+LF) 或 Mac (CR) |
+| 字段          | 要求                                                   |
+| ------------- | ------------------------------------------------------ |
+| `id`          | 必须匹配 `^[a-zA-Z][a-zA-Z0-9._-]+$` 且等于仓库名称    |
+| `name`        | 必填，任意单行字符串                                   |
+| `version`     | 必填，任意单行字符串                                   |
+| `versionCode` | 必填，必须是整数                                       |
+| `author`      | 必填，任意单行字符串                                   |
+| `description` | 必填，任意单行字符串                                   |
+| 换行符        | 必须使用 UNIX (LF)，不能是 Windows (CR+LF) 或 Mac (CR) |
 
 ### ID 格式示例
 
@@ -106,6 +107,7 @@ description=Module description
 ```
 
 例如，如果 module.prop 内容为：
+
 ```properties
 id=my_module
 version=v1.2.3

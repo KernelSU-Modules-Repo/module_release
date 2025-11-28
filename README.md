@@ -2,12 +2,15 @@
 
 English | [简体中文](README_CN.md)
 
-A GitHub Action for creating immutable releases with `module.prop` validation for Magisk/KernelSU modules.
+A GitHub Action for creating immutable releases with `module.prop` validation
+for Magisk/KernelSU modules.
 
 ## Features
 
-- **Immutable releases**: Creates release and uploads asset in a single operation
-- **module.prop validation**: Validates the zip file contains a valid `module.prop`
+- **Immutable releases**: Creates release and uploads asset in a single
+  operation
+- **module.prop validation**: Validates the zip file contains a valid
+  `module.prop`
 - **ID verification**: Ensures module ID matches the repository name
 - **Format validation**: Validates all required fields and formats
 - **Auto-naming**: Uploads asset as `{id}-{versionCode}-{version}.zip`
@@ -42,30 +45,31 @@ jobs:
 
 ## Inputs
 
-| Input | Description | Required | Default |
-|-------|-------------|----------|---------|
-| `file` | Path to the zip file to upload | Yes | - |
-| `tag_name` | Git tag name for the release | No | `github.ref_name` |
-| `name` | Release name | No | Tag name |
-| `body` | Release body/description | No | - |
-| `body_path` | Path to file containing release body | No | - |
-| `prerelease` | Mark as prerelease | No | `false` |
-| `target_commitish` | Commitish value for the tag | No | - |
-| `token` | GitHub token | No | `github.token` |
-| `generate_release_notes` | Auto-generate release notes | No | `false` |
-| `make_latest` | Mark as latest release (`true`/`false`/`legacy`) | No | - |
+| Input                    | Description                                      | Required | Default           |
+| ------------------------ | ------------------------------------------------ | -------- | ----------------- |
+| `file`                   | Path to the zip file to upload                   | Yes      | -                 |
+| `tag_name`               | Git tag name for the release                     | No       | `github.ref_name` |
+| `name`                   | Release name                                     | No       | Tag name          |
+| `body`                   | Release body/description                         | No       | -                 |
+| `body_path`              | Path to file containing release body             | No       | -                 |
+| `prerelease`             | Mark as prerelease                               | No       | `false`           |
+| `target_commitish`       | Commitish value for the tag                      | No       | -                 |
+| `token`                  | GitHub token                                     | No       | `github.token`    |
+| `generate_release_notes` | Auto-generate release notes                      | No       | `false`           |
+| `make_latest`            | Mark as latest release (`true`/`false`/`legacy`) | No       | -                 |
 
 ## Outputs
 
-| Output | Description |
-|--------|-------------|
-| `url` | Release HTML URL |
-| `id` | Release ID |
+| Output       | Description        |
+| ------------ | ------------------ |
+| `url`        | Release HTML URL   |
+| `id`         | Release ID         |
 | `upload_url` | Release upload URL |
 
 ## module.prop Requirements
 
-The zip file must contain a `module.prop` file at the root level with the following fields:
+The zip file must contain a `module.prop` file at the root level with the
+following fields:
 
 ```properties
 id=example_module
@@ -78,15 +82,15 @@ description=Module description
 
 ### Validation Rules
 
-| Field | Requirement |
-|-------|-------------|
-| `id` | Must match `^[a-zA-Z][a-zA-Z0-9._-]+$` and equal repository name |
-| `name` | Required, any single line string |
-| `version` | Required, any single line string |
-| `versionCode` | Required, must be an integer |
-| `author` | Required, any single line string |
-| `description` | Required, any single line string |
-| Line endings | Must use UNIX (LF), not Windows (CR+LF) or Mac (CR) |
+| Field         | Requirement                                                      |
+| ------------- | ---------------------------------------------------------------- |
+| `id`          | Must match `^[a-zA-Z][a-zA-Z0-9._-]+$` and equal repository name |
+| `name`        | Required, any single line string                                 |
+| `version`     | Required, any single line string                                 |
+| `versionCode` | Required, must be an integer                                     |
+| `author`      | Required, any single line string                                 |
+| `description` | Required, any single line string                                 |
+| Line endings  | Must use UNIX (LF), not Windows (CR+LF) or Mac (CR)              |
 
 ### ID Format Examples
 
@@ -106,6 +110,7 @@ The uploaded asset will be automatically renamed to:
 ```
 
 For example, with:
+
 ```properties
 id=my_module
 version=v1.2.3
