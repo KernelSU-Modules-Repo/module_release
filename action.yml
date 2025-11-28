@@ -1,23 +1,53 @@
-name: The name of your action here
-description: Provide a description here
-author: Your name or organization here
+name: Module Release
+description: Create immutable GitHub Release with module validation
+author: ylarod
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: package
+  color: blue
 
-# Define your inputs here.
 inputs:
-  milliseconds:
-    description: Your input description here
+  file:
+    description: Path to the module.zip file to upload
     required: true
-    default: '1000'
+  tag_name:
+    description: Git tag name for the release
+    required: false
+  name:
+    description: Release name (defaults to tag name)
+    required: false
+  body:
+    description: Release body/description
+    required: false
+  body_path:
+    description: Path to file containing release body
+    required: false
+  prerelease:
+    description: Mark as prerelease
+    required: false
+    default: 'false'
+  target_commitish:
+    description: Commitish value for the tag
+    required: false
+  token:
+    description: GitHub token
+    required: false
+    default: ${{ github.token }}
+  generate_release_notes:
+    description: Auto-generate release notes
+    required: false
+    default: 'false'
+  make_latest:
+    description: Mark as latest release (true/false/legacy)
+    required: false
 
-# Define your outputs here.
 outputs:
-  time:
-    description: Your output description here
+  url:
+    description: Release HTML URL
+  id:
+    description: Release ID
+  upload_url:
+    description: Release upload URL
 
 runs:
   using: node24
