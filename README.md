@@ -37,7 +37,7 @@ jobs:
           zip -r module.zip .
 
       - name: Create Release
-        uses: KernelSU-Modules-Repo/module_release@v1
+        uses: KernelSU-Modules-Repo/module_release@main
         with:
           file: module.zip
           token: ${{ secrets.GITHUB_TOKEN }}
